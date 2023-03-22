@@ -9,15 +9,13 @@ const app = express();
 const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 const contactus = require('./routes/contactUs')
-
+const errorcontroller = require('./controllers/product')
 app.use(parser.urlencoded());
 
 app.use('/admin',adminRoutes);
 app.use('/shop',shopRoutes);
 app.use(contactus)
 
-app.use((req,res,next) => {
-    res.status(404).sendFile(path.join(__dirname,'views','error.html'))
-});
+app.use(errorcontroller.error);
 
 app.listen(3000);
